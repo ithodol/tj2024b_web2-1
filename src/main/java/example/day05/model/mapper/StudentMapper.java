@@ -43,7 +43,7 @@ public interface StudentMapper {
     // 동적 쿼리 : <foreach collection="반복할 리스트 매개변수명" item="반복변수명" seperator="반복사이문자">
     @Insert("""
             <script>
-            INSERT INTO student (name, kor, math) VALUES 
+            INSERT INTO student (name, kor, math) VALUES
             <foreach collection="list" item="student" separator=",">
             (#{student.name}, #{student.kor}, #{student.math})
             </foreach>
