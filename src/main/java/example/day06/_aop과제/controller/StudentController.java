@@ -18,9 +18,9 @@ import java.util.Map;
 @Aspect
 @Component
 class StudentControllerAdvice {
-    @Before("execution(* example.day06._aop과제.service.StudentService.save(..))")
-    public void beforeSave() {
-        System.out.println("등록전");
+    @Before("execution(* example.day06._aop과제.service.StudentService.save(..))&& args(map)")
+    public void beforeSave(HashMap<String, Object> map) {
+        System.out.println("등록전 :" + map);
     }
     @AfterReturning(value = "execution(* example.day06._aop과제.service.StudentService.save(..))", returning = "result")
     public void afterSave(Object result) {
@@ -28,7 +28,7 @@ class StudentControllerAdvice {
     }
 
     @SneakyThrows
-    @Around("execution(* example.day06._aop과제.service.StudentService.save(..))")
+    @Around("execution(* example.day06._aop과제.service.StudentService.save(..)) ")
     public Object aroundSave(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();
@@ -40,7 +40,7 @@ class StudentControllerAdvice {
     }
     @Before("execution(* example.day06._aop과제.service.StudentService.findAll(..))")
     public void beforeFindAll() {
-        System.out.println("전체조회 전");
+        System.out.println("전체조회 전" );
     }
     @AfterReturning(value = "execution(* example.day06._aop과제.service.StudentService.findAll(..))", returning = "result")
     public void afterFindAll(List<Map<String, Object>> result) {
